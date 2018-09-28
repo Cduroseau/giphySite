@@ -7,9 +7,10 @@
        function displaySearchTopic() {
 
         var search = $(this).attr("data-name");
+        console.log(search)
 
         //queryURL for Giphy API
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&api_key=BgMajQrP7pJSKLTKeifz6R5o2CDpfsBp&limit=10";
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&&api_key=BgMajQrP7pJSKLTKeifz6R5o2CDpfsBp&&limit=10";
 
         $.ajax({
           url: queryURL,

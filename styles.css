@@ -32,9 +32,18 @@ input[type=text] {
 
 #search-view{
     background-color: blue;
+    min-height: 400px;
 }
 
 #footer{
     background-color: yellow;
     height: 10%;
+}
+
+img{
+    padding: 15px;
+}
+
+button{
+    padding: 10px;
 }

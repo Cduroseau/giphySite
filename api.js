@@ -4,28 +4,28 @@
     var searchTopic =[];
 
     // Function for dumping the JSON content for each button into the div
-       function displaySearchTopic() {
+      //  function displaySearchTopic() {
 
-        var search = $(this).attr("data-name");
-        console.log(search)
+      //   var search = $(this).attr("data-name");
+      //   console.log(search)
 
-        //queryURL for Giphy API
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&&api_key=BgMajQrP7pJSKLTKeifz6R5o2CDpfsBp&&limit=10";
+      //   //queryURL for Giphy API
+      //   var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&&api_key=BgMajQrP7pJSKLTKeifz6R5o2CDpfsBp&&limit=10";
 
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).then(function(response) {
-          console.log("success", response)
+      //   $.ajax({
+      //     url: queryURL,
+      //     method: "GET"
+      //   }).then(function(response) {
+      //     console.log("success", response)
 
-          for (var i = 0; i < response.data.length; i++){
-            var img = $("<img>").attr("src", response.data[i].images.fixed_height.url)
-            $("#search-view").append(img)
-            console.log(response.data)
-          }
+      //     for (var i = 0; i < response.data.length; i++){
+      //       var img = $("<img>").attr("src", response.data[i].images.fixed_height.url)
+      //       $("#search-view").append(img)
+      //       console.log(response.data)
+      //     }
 
-         });
-      }
+      //    });
+      // }
 
            function renderButtons() {
 
@@ -40,6 +40,7 @@
                newButton.addClass("btn");
                newButton.addClass("gif-btn");
                newButton.text(searchTopic[i]);
+               newButton.data('name', searchTopic[i] )
                $("#buttons-container").append(newButton);
              }
            }
@@ -61,7 +62,27 @@
 
        // Function for displaying the gifs
       //  $(document).on("click", ".search", displaySearchInfo);
-       $(document).on("click", ".gif-btn", displaySearchTopic)
+       $(document).on("click", ".gif-btn", function(){
+        var search = $(this).data("name");
+        console.log(search)
+
+        //queryURL for Giphy API
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search + "&&api_key=BgMajQrP7pJSKLTKeifz6R5o2CDpfsBp&&limit=14";
+
+        $.ajax({
+          url: queryURL,
+          method: "GET"
+        }).then(function(response) {
+          console.log("success", response)
+          $("#search-view").empty()
+          for (var i = 0; i < response.data.length; i++){
+            var img = $("<img>").attr("src", response.data[i].images.fixed_height.url)
+            $("#search-view").append(img)
+            console.log(response.data)
+          }
+
+         });
+       })
 
        // Calling the renderButtons function to display the initial buttons
        renderButtons();
